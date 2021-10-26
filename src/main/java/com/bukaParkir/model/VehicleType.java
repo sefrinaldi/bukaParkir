@@ -1,5 +1,7 @@
 package com.bukaParkir.model;
 
+import com.bukaParkir.common.auditable.ModelBase;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -7,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "vehicle_type")
-public class VehicleType {
+public class VehicleType extends ModelBase {
 
     @NotNull
     @Column(name = "type")

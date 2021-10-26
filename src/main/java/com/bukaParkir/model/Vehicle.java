@@ -31,12 +31,12 @@ public class Vehicle extends ModelBase {
     private Date dateOut;
 
     @NotNull
-    @Temporal(TemporalType.TIME)
+//    @Temporal(TemporalType.TIME)
     @Column(name = "time_in")
     private Time timeIn;
 
     @NotNull
-    @Temporal(TemporalType.TIME)
+//    @Temporal(TemporalType.TIME)
     @Column(name = "time_out")
     private Time timeOut;
 
