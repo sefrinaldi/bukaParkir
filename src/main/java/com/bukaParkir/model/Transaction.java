@@ -1,11 +1,13 @@
 package com.bukaParkir.model;
 
+import com.bukaParkir.common.auditable.ModelBase;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "transaction")
-public class Transaction {
+public class Transaction extends ModelBase {
 
     @NotNull
     @ManyToOne

@@ -3,6 +3,8 @@ package com.bukaParkir.model;
 import com.bukaParkir.common.auditable.ModelBase;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -20,6 +22,8 @@ public class User extends ModelBase {
     private String password;
 
     @NotNull
+    @ManyToOne
+    @JoinColumn(name = "fk_role_id")
     private Role role;
 
     @NotNull
