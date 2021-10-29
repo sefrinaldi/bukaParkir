@@ -4,6 +4,7 @@ import com.bukaParkir.common.auditable.ModelBase;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -12,7 +13,7 @@ import javax.validation.constraints.NotNull;
 public class VehicleType extends ModelBase {
 
     @NotNull
-    @Column(name = "type")
+    @Column(name = "type", unique = true)
     private String type;
 
     @NotNull

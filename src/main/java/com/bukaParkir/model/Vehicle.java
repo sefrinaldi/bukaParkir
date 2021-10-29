@@ -1,6 +1,7 @@
 package com.bukaParkir.model;
 
 import com.bukaParkir.common.auditable.ModelBase;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,22 +21,22 @@ public class Vehicle extends ModelBase {
     @Column(name = "police_number")
     private String policeNumber;
 
-    @NotNull
+//    @NotNull
+    @CreatedDate
     @Temporal(TemporalType.DATE)
     @Column(name = "date_in")
     private Date dateIn;
 
-    @NotNull
+
     @Temporal(TemporalType.DATE)
     @Column(name = "date_out")
     private Date dateOut;
 
-    @NotNull
+//    @NotNull
 //    @Temporal(TemporalType.TIME)
     @Column(name = "time_in")
     private Time timeIn;
 
-    @NotNull
 //    @Temporal(TemporalType.TIME)
     @Column(name = "time_out")
     private Time timeOut;
@@ -44,7 +45,20 @@ public class Vehicle extends ModelBase {
     @Column(name = "status")
     private String status;
 
+    @PrePersist
+    private void onCreate() {
+        dateIn = new Date();
+    }
+
     public Vehicle() {
+    }
+
+    public Vehicle(VehicleType vehicleType, String policeNumber, Date dateIn, Time timeIn, String status) {
+        this.vehicleType = vehicleType;
+        this.policeNumber = policeNumber;
+        this.dateIn = dateIn;
+        this.timeIn = timeIn;
+        this.status = status;
     }
 
     public Vehicle(VehicleType vehicleType, String policeNumber, Date dateIn, Date dateOut, Time timeIn, Time timeOut, String status) {
