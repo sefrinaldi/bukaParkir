@@ -32,4 +32,9 @@ public class VehicleController {
     public BaseResponse deleteVehicle(@PathVariable Long id) {
         return vehicleService.deleteVehicle(id);
     }
+
+    @PostMapping("/update-police/{name}")
+    public BaseResponse updatePolice(@PathVariable String name, @RequestBody VehicleRequest vehicleRequest) {
+        return vehicleService.getPoliceNumber(name, vehicleRequest);
+    }
 }
