@@ -102,15 +102,13 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public BaseResponse getPoliceNumber(String policeNumber, VehicleRequest vehicleRequest) {
+    public BaseResponse getPoliceNumber(String policeNumber) {
         try {
             Vehicle vehicle = vehicleRepository.findByPoliceNumberAndStatus(policeNumber, "in");
-            VehicleType vehicleType = vehicleTypeRepository.findById(vehicleRequest.getVehicleTypeId()).get();
-
-            vehicle.setVehicleType(vehicleType);
-            vehicle.setPoliceNumber(policeNumber);
-//            vehicle.setDateOut(vehicleRequest.getDateOut());
-//            vehicle.setTimeOut(vehicleRequest.getTimeOut());
+//            VehicleType vehicleType = vehicleTypeRepository.findById(vehicle.getVehicleType().getId()).get();
+//
+//            vehicle.setVehicleType(vehicleType);
+//            vehicle.setPoliceNumber(policeNumber);
             vehicle.setDateOut(new Date());
             vehicle.setTimeOut(new Date());
             if (vehicle.getDateOut() != null && vehicle.getTimeOut() != null) {

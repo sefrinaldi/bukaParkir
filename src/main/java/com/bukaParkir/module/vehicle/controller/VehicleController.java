@@ -33,8 +33,8 @@ public class VehicleController {
         return vehicleService.deleteVehicle(id);
     }
 
-    @PostMapping("/update-police/{name}")
-    public BaseResponse updatePolice(@PathVariable String name, @RequestBody VehicleRequest vehicleRequest) {
-        return vehicleService.getPoliceNumber(name, vehicleRequest);
+    @PostMapping("/update-police/{policeNumber}")
+    public BaseResponse updatePolice(@PathVariable String policeNumber) {
+        return vehicleService.getPoliceNumber(policeNumber);
     }
 }
