@@ -87,10 +87,9 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public BaseResponse deleteVehicle(Long id) {
+    public BaseResponse deleteVehicle(String policeNumber) {
         try {
-            Vehicle vehicle = vehicleRepository.findById(id)
-                    .orElse(new Vehicle());
+            Vehicle vehicle = vehicleRepository.findByPoliceNumberAndStatus(policeNumber, "in");
 
             vehicle.setStatus("out");
 

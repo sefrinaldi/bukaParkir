@@ -28,9 +28,9 @@ public class VehicleController {
         return vehicleService.updateVehicle(id, vehicleRequest);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public BaseResponse deleteVehicle(@PathVariable Long id) {
-        return vehicleService.deleteVehicle(id);
+    @DeleteMapping("/delete/{policeNumber}")
+    public BaseResponse deleteVehicle(@PathVariable String policeNumber) {
+        return vehicleService.deleteVehicle(policeNumber);
     }
 
     @PostMapping("/update-police/{policeNumber}")

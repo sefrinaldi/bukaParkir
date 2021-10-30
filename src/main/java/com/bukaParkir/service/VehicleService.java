@@ -11,7 +11,7 @@ public interface VehicleService {
 
     BaseResponse updateVehicle(Long id, VehicleRequest vehicleRequest);
 
-    BaseResponse deleteVehicle(Long id);
+    BaseResponse deleteVehicle(String policeNumber);
 
     BaseResponse getPoliceNumber(String policeNumber);
 }
