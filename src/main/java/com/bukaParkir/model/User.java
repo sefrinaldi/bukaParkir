@@ -2,10 +2,7 @@ package com.bukaParkir.model;
 
 import com.bukaParkir.common.auditable.ModelBase;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -13,12 +10,15 @@ import javax.validation.constraints.NotNull;
 public class User extends ModelBase {
 
     @NotNull
+    @Column(name = "name")
     private String name;
 
     @NotNull
+    @Column(name = "email", unique = true)
     private String email;
 
     @NotNull
+    @Column(name = "password")
     private String password;
 
     @NotNull
@@ -27,6 +27,7 @@ public class User extends ModelBase {
     private Role role;
 
     @NotNull
+    @Column(name = "is_active")
     private int isActive;
 
     public User() {
