@@ -24,7 +24,7 @@ public class Vehicle extends ModelBase {
     private String policeNumber;
 
 //    @NotNull
-    @CreatedDate
+//    @CreatedDate
     @Temporal(TemporalType.DATE)
     @Column(name = "date_in")
     private Date dateIn;

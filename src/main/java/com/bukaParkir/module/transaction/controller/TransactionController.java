@@ -16,8 +16,8 @@ public class TransactionController {
     @Autowired
     TransactionService transactionService;
 
-    @PostMapping("/payment/{id}")
-    public BaseResponse paymentTransaction(@PathVariable Long id, TransactionRequest request){
-        return transactionService.transaction(id, request);
+    @PostMapping("/payment/{policeNumber}")
+    public BaseResponse paymentTransaction(@PathVariable String policeNumber){
+        return transactionService.transaction(policeNumber);
     }
 }

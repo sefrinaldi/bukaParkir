@@ -5,5 +5,5 @@ import com.bukaParkir.module.transaction.payload.TransactionRequest;
 
 public interface TransactionService {
 
-    BaseResponse transaction(Long id, TransactionRequest transactionRequest);
+    BaseResponse transaction(String policeNumber);
 }

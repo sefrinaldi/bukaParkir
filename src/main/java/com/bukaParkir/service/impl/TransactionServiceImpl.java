@@ -11,6 +11,10 @@ import com.bukaParkir.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 @Service
 public class TransactionServiceImpl implements TransactionService {
 
@@ -21,19 +25,34 @@ public class TransactionServiceImpl implements TransactionService {
     TransactionRepository transactionRepository;
 
     @Override
-    public BaseResponse transaction(Long id, TransactionRequest request) {
+    public BaseResponse transaction(String policeNumber) {
         try {
-            Vehicle vehicle = vehicleRepository.findById(id).get();
+            Vehicle vehicle = vehicleRepository.findByPoliceNumberAndStatus(policeNumber, "in");
 
             if (vehicle != null) {
-                vehicle.setDateOut(request.getDateOut());
-                vehicle.setTimeOut(request.getTimeOut());
+
+                vehicle.setDateOut(new Date());
+                vehicle.setTimeOut(new Date());
                 vehicle.setStatus("out");
                 vehicleRepository.save(vehicle);
 
                 Transaction transaction = new Transaction();
                 transaction.setVehicle(vehicle);
-                transaction.setTotalPrice(50000);
+                Long time = vehicle.getTimeOut().getTime() - vehicle.getTimeIn().getTime();
+                Long diffInMinute = (time / (1000 * 60)) % 60;
+                Long diffInHour = (time / (1000 * 60 * 60)) % 24;
+
+                if (diffInMinute < 10) {
+                    if (diffInHour < 2) {
+                        diffInHour = 1L;
+                    }
+                } else {
+                    diffInHour++;
+                }
+
+                double price = diffInHour * vehicle.getVehicleType().getPrice();
+
+                transaction.setTotalPrice(price);
                 transactionRepository.save(transaction);
 
                 return new BaseResponse(CommonMessage.SAVED, 200, transaction);

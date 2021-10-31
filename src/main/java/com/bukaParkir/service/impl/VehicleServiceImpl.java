@@ -33,8 +33,8 @@ public class VehicleServiceImpl implements VehicleService {
                     .orElse(null);
             vehicle.setVehicleType(vehicleType);
             vehicle.setPoliceNumber(vehicleRequest.getPoliceNumber());
-//            vehicle.setDateIn(vehicleRequest.getDateIn());
-//            vehicle.setTimeIn(new Date());
+            vehicle.setDateIn(new Date());
+            vehicle.setTimeIn(new Date());
             vehicle.setStatus("in");
 
 
