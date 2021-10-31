@@ -1,10 +1,13 @@
 package com.bukaParkir.model;
 
 import com.bukaParkir.common.auditable.ModelBase;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
@@ -20,34 +23,48 @@ public class Vehicle extends ModelBase {
     @Column(name = "police_number")
     private String policeNumber;
 
-    @NotNull
+//    @NotNull
+//    @CreatedDate
     @Temporal(TemporalType.DATE)
     @Column(name = "date_in")
     private Date dateIn;
 
-    @NotNull
+
     @Temporal(TemporalType.DATE)
     @Column(name = "date_out")
     private Date dateOut;
 
-    @NotNull
-//    @Temporal(TemporalType.TIME)
+//    @NotNull
+    @Temporal(TemporalType.TIME)
     @Column(name = "time_in")
-    private Time timeIn;
+    private Date timeIn;
 
-    @NotNull
-//    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIME)
     @Column(name = "time_out")
-    private Time timeOut;
+    private Date timeOut;
 
     @NotNull
     @Column(name = "status")
     private String status;
 
+    @PrePersist
+    private void onCreate() {
+        dateIn = new Date();
+        timeIn = new Date();
+    }
+
     public Vehicle() {
     }
 
-    public Vehicle(VehicleType vehicleType, String policeNumber, Date dateIn, Date dateOut, Time timeIn, Time timeOut, String status) {
+    public Vehicle(VehicleType vehicleType, String policeNumber, Date dateIn, Date timeIn, String status) {
+        this.vehicleType = vehicleType;
+        this.policeNumber = policeNumber;
+        this.dateIn = dateIn;
+        this.timeIn = timeIn;
+        this.status = status;
+    }
+
+    public Vehicle(VehicleType vehicleType, String policeNumber, Date dateIn, Date dateOut, Date timeIn, Date timeOut, String status) {
         this.vehicleType = vehicleType;
         this.policeNumber = policeNumber;
         this.dateIn = dateIn;
@@ -73,11 +90,11 @@ public class Vehicle extends ModelBase {
         this.dateOut = dateOut;
     }
 
-    public void setTimeIn(Time timeIn) {
+    public void setTimeIn(Date timeIn) {
         this.timeIn = timeIn;
     }
 
-    public void setTimeOut(Time timeOut) {
+    public void setTimeOut(Date timeOut) {
         this.timeOut = timeOut;
     }
 
@@ -101,11 +118,11 @@ public class Vehicle extends ModelBase {
         return dateOut;
     }
 
-    public Time getTimeIn() {
+    public Date getTimeIn() {
         return timeIn;
     }
 
-    public Time getTimeOut() {
+    public Date getTimeOut() {
         return timeOut;
     }
 
